@@ -99,8 +99,7 @@ exports.bookinstance_delete_get = asyncHandler(async (req, res, next) => {
     .exec();
   if (bookInstance == null) {
     //No results
-    const err = new Error("Book copy not found");
-    err.status = 404;
+    res.redirect("/catalog/bookinstances");
     return next(err);
   }
 
@@ -117,9 +116,8 @@ exports.bookinstance_delete_post = asyncHandler(async (req, res, next) => {
     .exec();
   if (bookInstance == null) {
     //No results
-    const err = new Error("Book copy not found");
-    err.status = 404;
-    return next(err);
+    res.redirect("/catalog/bookinstances");
+    return;
   } else {
     await BookInstance.findByIdAndDelete(req.body.bookinstanceid);
     res.redirect("/catalog/bookinstances");

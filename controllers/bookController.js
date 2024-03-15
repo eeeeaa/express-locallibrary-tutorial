@@ -160,9 +160,7 @@ exports.book_delete_get = asyncHandler(async (req, res, next) => {
 
   if (book == null) {
     // No results
-    const err = new Error("Book not found");
-    err.status = 404;
-    return next(err);
+    res.redirect("/catalog/books");
   }
 
   res.render("book_delete", {
@@ -180,9 +178,8 @@ exports.book_delete_post = asyncHandler(async (req, res, next) => {
   ]);
   if (book == null) {
     // No results
-    const err = new Error("Book not found");
-    err.status = 404;
-    return next(err);
+    //No results
+    res.redirect("/catalog/books");
   }
 
   if (bookInstances.length > 0) {
