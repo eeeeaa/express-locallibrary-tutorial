@@ -213,7 +213,13 @@ exports.book_update_get = asyncHandler(async (req, res, next) => {
 
   // Mark our selected genres as checked
   allGenres.forEach((genre) => {
-    if (book.genre.includes(genre._id)) genre.checked = "true";
+    if (
+      book.genre.find(
+        (bookGenre) => bookGenre._id.toString() === genre._id.toString()
+      ) !== undefined
+    ) {
+      genre.checked = "true";
+    }
   });
 
   res.render("book_form", {
